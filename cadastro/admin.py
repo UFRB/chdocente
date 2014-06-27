@@ -5,6 +5,10 @@ from django.contrib import admin
 from .models import Docente, Administrativo, Disciplina, Extensao, Pesquisa
 
 
+class AdminSite(admin.ModelAdmin):
+
+    site_header = "Carga Horária Docente"
+
 class DisciplinaAdmin(admin.ModelAdmin):
 
     list_display = ('codigo', 'nome', 'semestre', 'docente')
