@@ -28,6 +28,7 @@ class PesquisaAdmin(admin.ModelAdmin):
     list_display = ('semestre', 'docente', 'area', 'financiador')
     list_filter = ('semestre', 'docente__centro', 'area', 'financiador')
     search_fields = ('docente__nome', 'docente__matricula')
+    ordering = ['docente__nome']
 
     def get_queryset(self, request):
         qs = super(PesquisaAdmin, self).get_queryset(request)
@@ -42,6 +43,7 @@ class ExtensaoAdmin(admin.ModelAdmin):
     list_display = ('semestre', 'docente', 'area', 'financiador')
     list_filter = ('semestre', 'docente__centro', 'area', 'financiador')
     search_fields = ('docente__nome', 'docente__matricula')
+    ordering = ['docente__nome']
 
     def get_queryset(self, request):
         qs = super(ExtensaoAdmin, self).get_queryset(request)
@@ -55,6 +57,7 @@ class AdministrativoAdmin(admin.ModelAdmin):
 
     list_filter = ('semestre', 'docente__centro', 'cargo', 'comissoes')
     list_display = ('docente', 'semestre', 'cargo', 'comissoes')
+    ordering = ['docente__nome']
 
     def get_queryset(self, request):
         qs = super(AdministrativoAdmin, self).get_queryset(request)
