@@ -79,7 +79,7 @@ class DocenteAdmin(admin.ModelAdmin):
         groups = [group.name for group in request.user.groups.all()]
         if request.user.is_superuser:
             return qs
-        return qs.filter(docente__centro__in=groups)
+        return qs.filter(centro__in=groups)
 
 
 admin.site.register(Docente, DocenteAdmin)
