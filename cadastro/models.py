@@ -86,6 +86,7 @@ class Pesquisa(models.Model):
         ('20132', '2013.2')
         )
 
+    nome = models.CharField(max_length=255)
     docente = models.ForeignKey(Docente)
     semestre = models.CharField(choices=SEMESTRES, max_length=6)
     area = models.CharField(choices=AREAS_PESQUISA, max_length=20)
@@ -135,6 +136,7 @@ class Extensao(models.Model):
         ('20132', '2013.2')
         )
 
+    nome = models.CharField(max_length=255)
     docente = models.ForeignKey(Docente)
     semestre = models.CharField(choices=SEMESTRES, max_length=6)
     area = models.CharField(choices=AREAS_EXTENSAO, max_length=20)
