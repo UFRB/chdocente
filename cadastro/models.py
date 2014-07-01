@@ -75,6 +75,8 @@ class Pesquisa(models.Model):
         ('bnb', 'Banco do Nordeste'),
         ('natura', 'Natura'),
         ('cnpq', 'CNPq'),
+        ('capes', 'CAPES'),
+        ('fapesb', 'FAPESB'),
         ('mcti', 'MCTI'),
         ('outros', 'Outros')
         )
@@ -88,6 +90,7 @@ class Pesquisa(models.Model):
     semestre = models.CharField(choices=SEMESTRES, max_length=6)
     area = models.CharField(choices=AREAS_PESQUISA, max_length=20)
     financiador = models.CharField(choices=FINANCIADORES, max_length=20)
+    cargahoraria = models.IntegerField('Carga horária semanal', max_length=3, blank=True)
     estudantes_graduacao = models.IntegerField('Número de Estudantes de Graduação', max_length=2, null=True, blank=True)
     estudantes_pos = models.IntegerField('Número de Estudantes de Pós-Graduação', max_length=2, null=True, blank=True)
     bolsistas_pibic = models.IntegerField('Número de Bolsistas PIBIC/PIBITI', max_length=2, null=True, blank=True)
@@ -107,19 +110,24 @@ class Pesquisa(models.Model):
 class Extensao(models.Model):
 
     AREAS_EXTENSAO = (
-    ('comunicacao', 'Comunicação'),
-    ('cultura', 'Cultura'),
-    ('direitoshumanos', 'Direitos Humanos e Justiça'),
-    ('educacao', 'Educação'),
-    ('meioambiente', 'Meio Ambiente'),
-    ('saude', 'Saúde'),
-    ('tecnologia', 'Tecnologia e Produção'),
-    ('trabalho', 'Trabalho')
-    )
+        ('comunicacao', 'Comunicação'),
+        ('cultura', 'Cultura'),
+        ('direitoshumanos', 'Direitos Humanos e Justiça'),
+        ('educacao', 'Educação'),
+        ('meioambiente', 'Meio Ambiente'),
+        ('saude', 'Saúde'),
+        ('tecnologia', 'Tecnologia e Produção'),
+        ('trabalho', 'Trabalho')
+        )
 
     FINANCIADORES_EXTENSAO = (
+        ('semfinanciamento', 'Sem financiamento'),
         ('pibex', 'PIBEX'),
-        ('proext', 'PROEXT-MEC-SESU')
+        ('proext', 'PROEXT-MEC-SESU'),
+        ('cnpq', 'CNPq'),
+        ('capes', 'CAPES'),
+        ('fapesb', 'FAPESB'),
+        ('outros', 'Outros')
         )
 
     SEMESTRES = (
@@ -131,6 +139,7 @@ class Extensao(models.Model):
     semestre = models.CharField(choices=SEMESTRES, max_length=6)
     area = models.CharField(choices=AREAS_EXTENSAO, max_length=20)
     financiador = models.CharField(choices=FINANCIADORES_EXTENSAO, max_length=20)
+    cargahoraria = models.IntegerField('Carga horária semanal', max_length=3, blank=True)
     estudantes_graduacao = models.IntegerField('Número de Estudantes de Graduação', max_length=2, null=True, blank=True)
     estudantes_pos = models.IntegerField('Número de Estudantes de Pós-Graduação', max_length=2, null=True, blank=True)
     bolsistas_pibex = models.IntegerField('Número de Bolsistas PIBEX', max_length=2, null=True, blank=True)
