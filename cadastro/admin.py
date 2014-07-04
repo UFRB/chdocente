@@ -25,9 +25,9 @@ class DisciplinaAdmin(admin.ModelAdmin):
 
 class PesquisaAdmin(admin.ModelAdmin):
 
-    list_display = ('semestre', 'docente', 'area', 'financiador')
+    list_display = ('nome', 'semestre', 'docente', 'area', 'cargahoraria')
     list_filter = ('semestre', 'docente__centro', 'area', 'financiador')
-    search_fields = ('docente__nome', 'docente__matricula')
+    search_fields = ('nome', 'docente__nome', 'docente__matricula')
     ordering = ['docente__nome']
 
     def get_queryset(self, request):
@@ -40,9 +40,9 @@ class PesquisaAdmin(admin.ModelAdmin):
 
 class ExtensaoAdmin(admin.ModelAdmin):
 
-    list_display = ('semestre', 'docente', 'area', 'financiador')
+    list_display = ('nome', 'semestre', 'docente', 'area', 'cargahoraria')
     list_filter = ('semestre', 'docente__centro', 'area', 'financiador')
-    search_fields = ('docente__nome', 'docente__matricula')
+    search_fields = ('nome', 'docente__nome', 'docente__matricula')
     ordering = ['docente__nome']
 
     def get_queryset(self, request):
