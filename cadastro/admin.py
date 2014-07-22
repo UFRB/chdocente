@@ -9,10 +9,13 @@ class AdminSite(admin.ModelAdmin):
 
     site_header = "Carga Horária Docente"
 
+
 class DisciplinaAdmin(admin.ModelAdmin):
 
-    list_display = ('codigo', 'nome', 'semestre', 'docente')
-    list_filter = ('semestre', 'docente__centro')
+    list_display = ('codigo', 'nome', 'docente', 'semestre', 'tipo', 'nivel',
+        'multicampia', 'cargahoraria', 'estudantes')
+    list_editable = ('multicampia', 'nivel', 'estudantes', 'cargahoraria')
+    list_filter = ('semestre', 'docente__centro', 'estudantes')
     search_fields = ('codigo', 'nome', 'docente__nome', 'docente__matricula')
 
     def get_queryset(self, request):
