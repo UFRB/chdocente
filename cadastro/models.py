@@ -3,6 +3,20 @@
 from django.db import models
 
 
+class Semestre20131_Manager(models.Manager):
+
+    def get_queryset(self):
+        return super(Semestre20131_Manager, self).get_queryset()\
+            .filter(semestre='20131')
+
+
+class Semestre20132_Manager(models.Manager):
+
+    def get_queryset(self):
+        return super(Semestre20132_Manager, self).get_queryset()\
+            .filter(semestre='20132')
+
+
 class Docente(models.Model):
 
     CENTROS = (
@@ -48,6 +62,10 @@ class Disciplina(models.Model):
     tipo = models.CharField(choices=TIPOS, max_length=11)
     cargahoraria = models.IntegerField('Carga horária', max_length=3)
     estudantes = models.IntegerField('Número de Estudantes', max_length=3)
+
+    objects = models.Manager()
+    sem_20131 = Semestre20131_Manager()
+    sem_20132 = Semestre20132_Manager()
 
     def __str__(self):
         return '%s' % (self.codigo)
@@ -100,6 +118,10 @@ class Pesquisa(models.Model):
     parceria = models.CharField('Parceria Institucional', max_length=255, blank=True)
     parceria_inter = models.CharField('Parceria Interinstitucional', max_length=255, null=True, blank=True)
 
+    objects = models.Manager()
+    sem_20131 = Semestre20131_Manager()
+    sem_20132 = Semestre20132_Manager()
+
     def __str__(self):
         return '%s' % (self.id)
 
@@ -150,6 +172,10 @@ class Extensao(models.Model):
     parceria = models.CharField('Parceria Institucional', max_length=255, blank=True)
     parceria_inter = models.CharField('Parceria Interinstitucional', max_length=255, null=True, blank=True)
 
+    objects = models.Manager()
+    sem_20131 = Semestre20131_Manager()
+    sem_20132 = Semestre20132_Manager()
+
     def __str__(self):
         return '%s' % (self.id)
 
@@ -176,6 +202,10 @@ class Administrativo(models.Model):
     afastamento = models.BooleanField(default=False)
     cargo = models.CharField(choices=CARGOS, max_length=100, blank=True)
     comissoes = models.IntegerField('Número de comissões', max_length=2, null=True, blank=True)
+
+    objects = models.Manager()
+    sem_20131 = Semestre20131_Manager()
+    sem_20132 = Semestre20132_Manager()
 
     def __str__(self):
         return '%s - %s' % (self.docente, self.semestre)
