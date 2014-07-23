@@ -4,7 +4,7 @@ from django.views.generic.base import RedirectView
 from django.contrib import admin
 admin.autodiscover()
 
-from cadastro.views import relatorio
+from cadastro.views import RelatorioEnsino
 
 urlpatterns = patterns('',
     # Examples:
@@ -13,5 +13,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', RedirectView.as_view(url='admin/')),
-    url(r'^relatorio/(?P<centro>\w+)/$', relatorio)
+    url(r'^relatorio-ensino/', RelatorioEnsino),
 )

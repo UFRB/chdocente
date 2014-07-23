@@ -1,0 +1,25 @@
+{% extends "admin/base_site.html" %}
+{% load chartkick %}
+{% load static %}
+
+{% block object-tools %}
+{% endblock %}
+
+{% block content %}
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="{% static "chartkick.js" %}"></script>
+
+  <h3>Número de turmas por tipo</h3>
+  {% pie_chart turmas_tipo with id='chart-1' height='300px' %}
+
+  <h3>Multicampia</h3>
+  {% pie_chart multicampia with id='chart-2' height='300px' %}
+
+  <h3>Número de turmas por nível</h3>
+  {% pie_chart turmas_nivel with id='chart-3' height='300px' %}
+
+  <h3>Número de estudantes por turma</h3>
+  {% column_chart estudantes_turmas with id='chart-4' height='300px' %}
+
+{% endblock %}
+
