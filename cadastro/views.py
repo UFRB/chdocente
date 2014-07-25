@@ -19,12 +19,17 @@ def query_estudantes(query):
 
 def RelatorioEnsino(request):
     if 'centro' in request.GET and request.GET['centro']:
-        turmas = Disciplina.objects.filter(docente__centro=request.GET['centro'])
+        centro = request.GET['centro']
+        turmas = Disciplina.objects.filter(docente__centro=centro)
     else:
+        centro = ''
         turmas = Disciplina.objects.all()
 
     if 'semestre' in request.GET and request.GET['semestre']:
-        turmas = turmas.filter(semestre=request.GET['semestre'])
+        semestre = request.GET['semestre']
+        turmas = turmas.filter(semestre=semestre)
+    else:
+        semestre = ''
 
     # número de turmas por tipo
     teoricas = turmas.filter(tipo='teorica')
@@ -58,6 +63,8 @@ def RelatorioEnsino(request):
     estudantes_turmas_estagio = query_estudantes(estagio)
 
     return render(request, 'relatorio_ensino.html', {
+        'centro': centro,
+        'semestre': semestre,
         'turmas_tipo': turmas_tipo,
         'multicampia': multicampia,
         'turmas_nivel': turmas_nivel,
@@ -71,20 +78,23 @@ def RelatorioEnsino(request):
 def RelatorioDocente(request):
 
     if 'centro' in request.GET and request.GET['centro']:
-        num_docentes_ensino = Disciplina.objects.filter(docente__centro=request.GET['centro'])
-        num_docentes_pesquisa = Pesquisa.objects.filter(docente__centro=request.GET['centro'])
-        num_docentes_extensao = Extensao.objects.filter(docente__centro=request.GET['centro'])
+        centro = request.GET['centro']
+        num_docentes_ensino = Disciplina.objects.filter(docente__centro=centro)
+        num_docentes_pesquisa = Pesquisa.objects.filter(docente__centro=centro)
+        num_docentes_extensao = Extensao.objects.filter(docente__centro=centro)
         num_docentes = Docente.objects.filter(centro=request.GET['centro']).count()
     else:
+        centro = ''
         num_docentes_ensino = Disciplina.objects.all()
         num_docentes_pesquisa = Pesquisa.objects.all()
         num_docentes_extensao = Extensao.objects.all()
         num_docentes = Docente.objects.all().count()
 
     if 'semestre' in request.GET and request.GET['semestre']:
-        num_docentes_ensino = num_docentes_ensino.filter(semestre=request.GET['semestre'])
-        num_docentes_pesquisa = num_docentes_pesquisa.filter(semestre=request.GET['semestre'])
-        num_docentes_extensao = num_docentes_extensao.filter(semestre=request.GET['semestre'])
+        semestre = ''
+        num_docentes_ensino = num_docentes_ensino.filter(semestre=semestre)
+        num_docentes_pesquisa = num_docentes_pesquisa.filter(semestre=semestre)
+        num_docentes_extensao = num_docentes_extensao.filter(semestre=semestre)
 
     num_docentes_ensino = num_docentes_ensino.distinct('docente').count()
     num_docentes_pesquisa = num_docentes_pesquisa.distinct('docente').count()
@@ -106,6 +116,8 @@ def RelatorioDocente(request):
         ]
 
     return render(request, 'relatorio_docente.html', {
+        'centro': centro,
+        'semestre': semestre,
         'ensino': ensino,
         'pesquisa': pesquisa,
         'extensao': extensao

@@ -3,6 +3,10 @@
 {% load static %}
 
 {% block object-tools %}
+  <p class="navbar-brand">Relatório de Ensino
+    {% if centro %}- {{ centro|upper }}{% endif %}
+    {% if semestre %}- {{ semestre }}{% endif %}
+  </p>
 {% endblock %}
 
 {% block content %}
