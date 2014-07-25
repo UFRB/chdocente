@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 
-from .models import Disciplina, Docente, Pesquisa, Extensao, Atividade
+from .models import Disciplina, Docente, Pesquisa, Extensao, Administrativo
 
 
 def query_estudantes(query):
@@ -81,7 +81,7 @@ def RelatorioDocente(request):
         num_docentes_ensino = Disciplina.objects.filter(docente__centro=centro)
         num_docentes_pesquisa = Pesquisa.objects.filter(docente__centro=centro)
         num_docentes_extensao = Extensao.objects.filter(docente__centro=centro)
-        num_docentes_admin = Atividade.objects.filter(docente__centro=centro)
+        num_docentes_admin = Administrativo.objects.filter(docente__centro=centro)
         num_docentes = Docente.objects.filter(centro=centro).count()
     else:
         centro = ''
