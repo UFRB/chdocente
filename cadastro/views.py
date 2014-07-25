@@ -74,10 +74,12 @@ def RelatorioDocente(request):
         num_docentes_ensino = Disciplina.objects.filter(docente__centro=request.GET['centro'])
         num_docentes_pesquisa = Pesquisa.objects.filter(docente__centro=request.GET['centro'])
         num_docentes_extensao = Extensao.objects.filter(docente__centro=request.GET['centro'])
+        num_docentes = Docente.objects.filter(docente__centro=request.GET['centro']).count()
     else:
         num_docentes_ensino = Disciplina.objects.all()
         num_docentes_pesquisa = Pesquisa.objects.all()
         num_docentes_extensao = Extensao.objects.all()
+        num_docentes = Docente.objects.all().count()
 
     if 'semestre' in request.GET and request.GET['semestre']:
         num_docentes_ensino = num_docentes_ensino.filter(semestre=request.GET['semestre'])
@@ -87,8 +89,6 @@ def RelatorioDocente(request):
     num_docentes_ensino = num_docentes_ensino.distinct('docente').count()
     num_docentes_pesquisa = num_docentes_pesquisa.distinct('docente').count()
     num_docentes_extensao = num_docentes_extensao.distinct('docente').count()
-
-    num_docentes = Docente.objects.all().count()
 
     ensino = [
         ['Com atividades de ensino', num_docentes_ensino],
