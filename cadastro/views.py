@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from django.db.models import Count
 
-from .models import Disciplina, Docente, Pesquisa, Extensao
+from .models import Disciplina, Docente, Pesquisa, Extensao, Atividade
 
 
 def query_estudantes(query):
@@ -82,13 +81,14 @@ def RelatorioDocente(request):
         num_docentes_ensino = Disciplina.objects.filter(docente__centro=centro)
         num_docentes_pesquisa = Pesquisa.objects.filter(docente__centro=centro)
         num_docentes_extensao = Extensao.objects.filter(docente__centro=centro)
-        num_
-        num_docentes = Docente.objects.filter(centro=request.GET['centro']).count()
+        num_docentes_admin = Atividade.objects.filter(docente__centro=centro)
+        num_docentes = Docente.objects.filter(centro=centro).count()
     else:
         centro = ''
         num_docentes_ensino = Disciplina.objects.all()
         num_docentes_pesquisa = Pesquisa.objects.all()
         num_docentes_extensao = Extensao.objects.all()
+        num_docentes_admin = Atividade.objects.all()
         num_docentes = Docente.objects.all().count()
 
     if 'semestre' in request.GET and request.GET['semestre']:
@@ -96,12 +96,16 @@ def RelatorioDocente(request):
         num_docentes_ensino = num_docentes_ensino.filter(semestre=semestre)
         num_docentes_pesquisa = num_docentes_pesquisa.filter(semestre=semestre)
         num_docentes_extensao = num_docentes_extensao.filter(semestre=semestre)
+        num_docentes_admin = num_docentes_admin.filter(semestre=semestre)
     else:
         semestre = ''
 
     num_docentes_ensino = num_docentes_ensino.distinct('docente').count()
     num_docentes_pesquisa = num_docentes_pesquisa.distinct('docente').count()
     num_docentes_extensao = num_docentes_extensao.distinct('docente').count()
+    num_docentes_admin = num_docentes_admin \
+        .filter(cargo__in=['fg', 'cd', 'fuc']) \
+        .distinct('docente').count()
 
     ensino = [
         ['Com atividades de ensino', num_docentes_ensino],
@@ -118,10 +122,16 @@ def RelatorioDocente(request):
         ['Sem atividades de extensão', num_docentes - num_docentes_extensao]
         ]
 
+    administrativo = [
+        ['Com atividades administrativas', num_docentes_admin],
+        ['Sem atividades administrativas', num_docentes - num_docentes_admin]
+        ]
+
     return render(request, 'relatorio_docente.html', {
         'centro': centro,
         'semestre': semestre,
         'ensino': ensino,
         'pesquisa': pesquisa,
-        'extensao': extensao
+        'extensao': extensao,
+        'administrativo': administrativo
         })
