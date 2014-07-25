@@ -82,6 +82,7 @@ def RelatorioDocente(request):
         num_docentes_ensino = Disciplina.objects.filter(docente__centro=centro)
         num_docentes_pesquisa = Pesquisa.objects.filter(docente__centro=centro)
         num_docentes_extensao = Extensao.objects.filter(docente__centro=centro)
+        num_
         num_docentes = Docente.objects.filter(centro=request.GET['centro']).count()
     else:
         centro = ''
@@ -91,10 +92,12 @@ def RelatorioDocente(request):
         num_docentes = Docente.objects.all().count()
 
     if 'semestre' in request.GET and request.GET['semestre']:
-        semestre = ''
+        semestre = request.GET['semestre']
         num_docentes_ensino = num_docentes_ensino.filter(semestre=semestre)
         num_docentes_pesquisa = num_docentes_pesquisa.filter(semestre=semestre)
         num_docentes_extensao = num_docentes_extensao.filter(semestre=semestre)
+    else:
+        semestre = ''
 
     num_docentes_ensino = num_docentes_ensino.distinct('docente').count()
     num_docentes_pesquisa = num_docentes_pesquisa.distinct('docente').count()
