@@ -88,7 +88,7 @@ def RelatorioDocente(request):
         num_docentes_ensino = Disciplina.objects.all()
         num_docentes_pesquisa = Pesquisa.objects.all()
         num_docentes_extensao = Extensao.objects.all()
-        num_docentes_admin = Atividade.objects.all()
+        num_docentes_admin = Administrativo.objects.all()
         num_docentes = Docente.objects.all().count()
 
     if 'semestre' in request.GET and request.GET['semestre']:
