@@ -78,34 +78,36 @@ def RelatorioDocente(request):
 
     if 'centro' in request.GET and request.GET['centro']:
         centro = request.GET['centro']
-        num_docentes_ensino = Disciplina.objects.filter(docente__centro=centro)
-        num_docentes_pesquisa = Pesquisa.objects.filter(docente__centro=centro)
-        num_docentes_extensao = Extensao.objects.filter(docente__centro=centro)
-        num_docentes_admin = Administrativo.objects.filter(docente__centro=centro)
+        docentes_ensino = Disciplina.objects.filter(docente__centro=centro)
+        docentes_pesquisa = Pesquisa.objects.filter(docente__centro=centro)
+        docentes_extensao = Extensao.objects.filter(docente__centro=centro)
+        docentes_admin = Administrativo.objects.filter(docente__centro=centro)
         num_docentes = Docente.objects.filter(centro=centro).count()
     else:
         centro = ''
-        num_docentes_ensino = Disciplina.objects.all()
-        num_docentes_pesquisa = Pesquisa.objects.all()
-        num_docentes_extensao = Extensao.objects.all()
-        num_docentes_admin = Administrativo.objects.all()
+        docentes_ensino = Disciplina.objects.all()
+        docentes_pesquisa = Pesquisa.objects.all()
+        docentes_extensao = Extensao.objects.all()
+        docentes_admin = Administrativo.objects.all()
         num_docentes = Docente.objects.all().count()
 
     if 'semestre' in request.GET and request.GET['semestre']:
         semestre = request.GET['semestre']
-        num_docentes_ensino = num_docentes_ensino.filter(semestre=semestre)
-        num_docentes_pesquisa = num_docentes_pesquisa.filter(semestre=semestre)
-        num_docentes_extensao = num_docentes_extensao.filter(semestre=semestre)
-        num_docentes_admin = num_docentes_admin.filter(semestre=semestre)
+        docentes_ensino = docentes_ensino.filter(semestre=semestre)
+        docentes_pesquisa = docentes_pesquisa.filter(semestre=semestre)
+        docentes_extensao = docentes_extensao.filter(semestre=semestre)
+        docentes_admin = docentes_admin.filter(semestre=semestre)
     else:
         semestre = ''
 
-    num_docentes_ensino = num_docentes_ensino.distinct('docente').count()
-    num_docentes_pesquisa = num_docentes_pesquisa.distinct('docente').count()
-    num_docentes_extensao = num_docentes_extensao.distinct('docente').count()
-    num_docentes_afastados = num_docentes_admin.filter(afastamento=True) \
+
+
+    num_docentes_ensino = docentes_ensino.distinct('docente').count()
+    num_docentes_pesquisa = docentes_pesquisa.distinct('docente').count()
+    num_docentes_extensao = docentes_extensao.distinct('docente').count()
+    num_docentes_afastados = docentes_admin.filter(afastamento=True) \
         .distinct('docente').count()
-    num_docentes_admin = num_docentes_admin \
+    docentes_admin = docentes_admin \
         .filter(cargo__in=['fg', 'cd', 'fuc'])
 
     ensino = [
@@ -124,16 +126,16 @@ def RelatorioDocente(request):
         ]
 
     administrativo = [
-        ['Com atividades administrativas', num_docentes_admin
+        ['Com atividades administrativas', docentes_admin
             .distinct('docente').count()],
-        ['Sem atividades administrativas', num_docentes - num_docentes_admin
+        ['Sem atividades administrativas', num_docentes - docentes_admin
             .distinct('docente').count()]
         ]
 
     admin_detalhes = [
-        ['FG', num_docentes_admin.filter(cargo='fg').distinct('docente').count()],
-        ['CD', num_docentes_admin.filter(cargo='cd').distinct('docente').count()],
-        ['Coordenação de Colegiado', num_docentes_admin.filter(cargo='fuc')
+        ['FG', docentes_admin.filter(cargo='fg').distinct('docente').count()],
+        ['CD', docentes_admin.filter(cargo='cd').distinct('docente').count()],
+        ['Coordenação de Colegiado', docentes_admin.filter(cargo='fuc')
             .distinct('docente').count()],
         ]
 

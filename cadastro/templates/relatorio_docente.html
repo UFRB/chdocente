@@ -13,25 +13,35 @@
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="{% static "chartkick.js" %}"></script>
 
-  <h3>Docentes com atividade de ensino</h3>
-  {% pie_chart ensino with id='chart-1' height='300px' %}
-
-  <h3>Docentes com atividade de pesquisa</h3>
-  {% pie_chart pesquisa with id='chart-2' height='300px' %}
-
-  <h3>Docentes com atividade de extensão</h3>
-  {% pie_chart extensao with id='chart-3' height='300px' %}
-
-  <h3>Docentes com atividades administrativas</h3>
   <div class="row">
     <div class="col-md-6">
+      <h4>Docentes com atividade de ensino</h4>
+      {% pie_chart ensino with id='chart-1' height='300px' %}
+    </div>
+    <div class="col-md-6">
+      <h4>Docentes com atividade de pesquisa</h4>
+      {% pie_chart pesquisa with id='chart-2' height='300px' %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Docentes com atividade de extensão</h4>
+      {% pie_chart extensao with id='chart-3' height='300px' %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Docentes com atividades administrativas</h4>
       {% pie_chart administrativo with id='chart-4' height='300px' %}
     </div>
     <div class="col-md-6">
+      <h4>Docentes por tipo de cargo</h4>
       {% pie_chart admin_detalhes with id='chart-5' height='300px' %}
     </div>
   </div>
 
-  <h3>Docentes afastados</h3>
+  <h4>Docentes afastados</h4>
   {% pie_chart afastamento with id='chart-6' height='300px' %}
 {% endblock %}
