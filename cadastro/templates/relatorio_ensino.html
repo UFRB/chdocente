@@ -19,16 +19,19 @@
   {% pie_chart turmas_nivel with id='chart-3' height='300px' %}
 
   <h3>Número de estudantes por turma</h3>
-  {% column_chart estudantes_turmas with id='chart-4' height='300px' %}
+  {% column_chart estudantes_turmas with id='chart-4' height='350px' %}
 
   <h3>Número de estudantes por turma teórica</h3>
-  {% column_chart estudantes_turmas_teoricas with id='chart-5' height='300px' %}
+  {% column_chart estudantes_turmas_teoricas with id='chart-5' height='350px' %}
 
   <h3>Número de estudantes por turma prática</h3>
-  {% column_chart estudantes_turmas_praticas with id='chart-6' height='300px' %}
+  {% column_chart estudantes_turmas_praticas with id='chart-6' height='350px' %}
 
   <h3>Número de estudantes por turma de estágio</h3>
-  {% column_chart estudantes_turmas_estagio with id='chart-7' height='300px' %}
+  {% column_chart estudantes_turmas_estagio with id='chart-7' height='350px' %}
+
+  <h3>Docentes com atividade de ensino</h3>
+  {% pie_chart docentes_ensino with id='chart-8' height='300px' %}
 
 {% endblock %}
 
