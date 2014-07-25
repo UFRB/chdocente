@@ -103,6 +103,8 @@ def RelatorioDocente(request):
     num_docentes_ensino = num_docentes_ensino.distinct('docente').count()
     num_docentes_pesquisa = num_docentes_pesquisa.distinct('docente').count()
     num_docentes_extensao = num_docentes_extensao.distinct('docente').count()
+    num_docentes_afastados = num_docentes_admin.filter(afastamento=True) \
+        .distinct('docente').count()
     num_docentes_admin = num_docentes_admin \
         .filter(cargo__in=['fg', 'cd', 'fuc'])
 
@@ -135,6 +137,11 @@ def RelatorioDocente(request):
             .distinct('docente').count()],
         ]
 
+    afastamento = [
+        ['Docentes afastados', num_docentes_afastados],
+        ['Docentes em exercício', num_docentes - num_docentes_afastados]
+        ]
+
     return render(request, 'relatorio_docente.html', {
         'centro': centro,
         'semestre': semestre,
@@ -142,5 +149,6 @@ def RelatorioDocente(request):
         'pesquisa': pesquisa,
         'extensao': extensao,
         'administrativo': administrativo,
-        'admin_detalhes': admin_detalhes
+        'admin_detalhes': admin_detalhes,
+        'afastamento': afastamento
         })
