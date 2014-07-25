@@ -104,8 +104,7 @@ def RelatorioDocente(request):
     num_docentes_pesquisa = num_docentes_pesquisa.distinct('docente').count()
     num_docentes_extensao = num_docentes_extensao.distinct('docente').count()
     num_docentes_admin = num_docentes_admin \
-        .filter(cargo__in=['fg', 'cd', 'fuc']) \
-        .distinct('docente').count()
+        .filter(cargo__in=['fg', 'cd', 'fuc'])
 
     ensino = [
         ['Com atividades de ensino', num_docentes_ensino],
@@ -123,8 +122,17 @@ def RelatorioDocente(request):
         ]
 
     administrativo = [
-        ['Com atividades administrativas', num_docentes_admin],
-        ['Sem atividades administrativas', num_docentes - num_docentes_admin]
+        ['Com atividades administrativas', num_docentes_admin
+            .distinct('docente').count()],
+        ['Sem atividades administrativas', num_docentes - num_docentes_admin
+            .distinct('docente').count()]
+        ]
+
+    admin_detalhes = [
+        ['FG', num_docentes_admin.filter(cargo='fg').distinct('docente').count()],
+        ['CD', num_docentes_admin.filter(cargo='cd').distinct('docente').count()],
+        ['Coordenação de Colegiado', num_docentes_admin.filter(cargo='fuc')
+            .distinct('docente').count()],
         ]
 
     return render(request, 'relatorio_docente.html', {
@@ -133,5 +141,6 @@ def RelatorioDocente(request):
         'ensino': ensino,
         'pesquisa': pesquisa,
         'extensao': extensao,
-        'administrativo': administrativo
+        'administrativo': administrativo,
+        'admin_detalhes': admin_detalhes
         })
