@@ -23,8 +23,12 @@
   {% pie_chart extensao with id='chart-3' height='300px' %}
 
   <h3>Docentes com atividades administrativas</h3>
-  {% pie_chart administrativo with id='chart-4' height='300px' %}
-
-  <h3>Docentes por cargo administrativo</h3>
-  {% pie_chart admin_detalhes with id='chart-5' height='300px' %}
+  <div class="row">
+    <div class="col-md-6">
+      {% pie_chart administrativo with id='chart-4' height='300px' %}
+    </div>
+    <div class="col-md-6">
+      {% pie_chart admin_detalhes with id='chart-5' height='300px' %}
+    </div>
+  </div>
 {% endblock %}
