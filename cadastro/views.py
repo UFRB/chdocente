@@ -100,11 +100,23 @@ def RelatorioDocente(request):
     else:
         semestre = ''
 
+    docentes_ensino = [disciplina.docente
+        for disciplina in docentes_ensino.distinct('docente')]
+    docentes_pesquisa = [projeto.docente
+        for projeto in docentes_pesquisa.distinct('docente')]
+    docentes_extensao = [projeto.docente
+        for projeto in docentes_extensao.distinct('docente')]
 
+    docentes_ens_pes = [docente for docente in docentes_pesquisa
+        if docente in docentes_ensino]
+    docentes_ens_ext = [docente for docente in docentes_extensao
+        if docente in docentes_ensino]
+    docentes_ens_pes_ext = [docente for docente in docentes_ens_pes
+        if docente in docentes_ens_ext]
 
-    num_docentes_ensino = docentes_ensino.distinct('docente').count()
-    num_docentes_pesquisa = docentes_pesquisa.distinct('docente').count()
-    num_docentes_extensao = docentes_extensao.distinct('docente').count()
+    num_docentes_ensino = len(docentes_ensino)
+    num_docentes_pesquisa = len(docentes_pesquisa)
+    num_docentes_extensao = len(docentes_extensao)
     num_docentes_afastados = docentes_admin.filter(afastamento=True) \
         .distinct('docente').count()
     docentes_admin = docentes_admin \
@@ -123,6 +135,21 @@ def RelatorioDocente(request):
     extensao = [
         ['Com atividades de extensão', num_docentes_extensao],
         ['Sem atividades de extensão', num_docentes - num_docentes_extensao]
+        ]
+
+    ens_pes_ext = [
+        ['Sim', len(docentes_ens_pes_ext)],
+        ['Não', num_docentes - len(docentes_ens_pes_ext)]
+        ]
+
+    ens_pes = [
+        ['Sim', len(docentes_ens_pes)],
+        ['Não', num_docentes - len(docentes_ens_pes)]
+        ]
+
+    ens_ext = [
+        ['Sim', len(docentes_ens_ext)],
+        ['Não', num_docentes - len(docentes_ens_ext)]
         ]
 
     administrativo = [
@@ -148,6 +175,9 @@ def RelatorioDocente(request):
         'centro': centro,
         'semestre': semestre,
         'ensino': ensino,
+        'ens_pes_ext': ens_pes_ext,
+        'ens_pes': ens_pes,
+        'ens_ext': ens_ext,
         'pesquisa': pesquisa,
         'extensao': extensao,
         'administrativo': administrativo,
