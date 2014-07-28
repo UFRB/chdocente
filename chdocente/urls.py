@@ -5,6 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 from cadastro.views import RelatorioEnsino, RelatorioDocente
+from cadastro.views import ExportarDisciplinas, ExportarPesquisas
 
 urlpatterns = patterns('',
     # Examples:
@@ -15,4 +16,6 @@ urlpatterns = patterns('',
     url(r'^$', RedirectView.as_view(url='admin/')),
     url(r'^relatorio-ensino/', RelatorioEnsino),
     url(r'^relatorio-docente/', RelatorioDocente),
+    url(r'^exportar-disciplinas/', ExportarDisciplinas),
+    url(r'^exportar-pesquisas/', ExportarPesquisas),
 )

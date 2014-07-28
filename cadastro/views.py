@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import csv
+
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from .models import Disciplina, Docente, Pesquisa, Extensao, Administrativo
@@ -184,3 +187,43 @@ def RelatorioDocente(request):
         'admin_detalhes': admin_detalhes,
         'afastamento': afastamento
         })
+
+
+def ExportarDisciplinas(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="disciplinas.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Centro', 'Código', 'Nome', 'Docente', 'Semestre', 'Tipo',
+        'Nível', 'Multicampia', 'Carga horária', 'Estudantes'])
+
+    for disciplina in Disciplina.objects.all():
+        writer.writerow([disciplina.docente.centro, disciplina.codigo,
+             disciplina.nome, disciplina.docente, disciplina.semestre,
+             disciplina.tipo, disciplina.nivel, disciplina.multicampia,
+             disciplina.cargahoraria, disciplina.estudantes])
+
+    return response
+
+
+def ExportarPesquisas(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="pesquisas.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Centro', 'Nome', 'Docente', 'Semestre', 'Área',
+        'Financiador', 'Carga horária', 'Estudantes de Graduação',
+        'Estudantes de Pós', 'Bolsistas PIBIC/PIBITI', 'Bolsistas PPQ',
+        'Voluntários', 'Parceria Institucional', 'Parceria Interinstitucional'])
+
+    for pesquisa in Pesquisa.objects.all():
+        writer.writerow([pesquisa.docente.centro, pesquisa.nome,
+             pesquisa.docente, pesquisa.semestre, pesquisa.area,
+             pesquisa.financiador, pesquisa.cargahoraria,
+             pesquisa.estudantes_graduacao, pesquisa.estudantes_pos,
+             pesquisa.bolsistas_pibic, pesquisa.bolsistas_ppq,
+             pesquisa.voluntarios, pesquisa.parceria, pesquisa.parceria_inter])
+
+    return response
