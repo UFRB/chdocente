@@ -210,7 +210,7 @@ def ExportarDisciplina(request):
 def ExportarPesquisa(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="pesquisas.csv"'
+    response['Content-Disposition'] = 'attachment; filename="pesquisa.csv"'
 
     writer = unicodecsv.writer(response, encoding='utf-8')
     writer.writerow(['Centro', 'Nome', 'Docente', 'Semestre', 'Área',
@@ -232,7 +232,7 @@ def ExportarPesquisa(request):
 def ExportarExtensao(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="pesquisas.csv"'
+    response['Content-Disposition'] = 'attachment; filename="extensao.csv"'
 
     writer = unicodecsv.writer(response, encoding='utf-8')
     writer.writerow(['Centro', 'Nome', 'Docente', 'Semestre', 'Área',
@@ -254,11 +254,11 @@ def ExportarExtensao(request):
 def ExportarAdministrativo(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="pesquisas.csv"'
+    response['Content-Disposition'] = 'attachment; filename="administrativo.csv"'
 
     writer = unicodecsv.writer(response, encoding='utf-8')
-    writer.writerow(['Centro', 'Nome', 'Docente', 'Semestre', 'Afastamento',
-        'Cargo', 'Comissões'])
+    writer.writerow(['Centro', 'Docente', 'Semestre', 'Afastamento', 'Cargo',
+        'Comissões'])
 
     for atividade in Administrativo.objects.all():
         writer.writerow([atividade.docente.centro, atividade.docente,
