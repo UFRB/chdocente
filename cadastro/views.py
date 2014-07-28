@@ -189,7 +189,7 @@ def RelatorioDocente(request):
         })
 
 
-def ExportarDisciplinas(request):
+def ExportarDisciplina(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="disciplinas.csv"'
@@ -207,7 +207,7 @@ def ExportarDisciplinas(request):
     return response
 
 
-def ExportarPesquisas(request):
+def ExportarPesquisa(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="pesquisas.csv"'
@@ -218,12 +218,51 @@ def ExportarPesquisas(request):
         'Estudantes de Pós', 'Bolsistas PIBIC/PIBITI', 'Bolsistas PPQ',
         'Voluntários', 'Parceria Institucional', 'Parceria Interinstitucional'])
 
-    for pesquisa in Pesquisa.objects.all():
-        writer.writerow([pesquisa.docente.centro, pesquisa.nome,
-             pesquisa.docente, pesquisa.semestre, pesquisa.area,
-             pesquisa.financiador, pesquisa.cargahoraria,
-             pesquisa.estudantes_graduacao, pesquisa.estudantes_pos,
-             pesquisa.bolsistas_pibic, pesquisa.bolsistas_ppq,
-             pesquisa.voluntarios, pesquisa.parceria, pesquisa.parceria_inter])
+    for projeto in Pesquisa.objects.all():
+        writer.writerow([projeto.docente.centro, projeto.nome, projeto.docente,
+             projeto.semestre, projeto.area, projeto.financiador,
+             projeto.cargahoraria, projeto.estudantes_graduacao,
+             projeto.estudantes_pos, projeto.bolsistas_pibic,
+             projeto.bolsistas_ppq, projeto.voluntarios, projeto.parceria,
+             projeto.parceria_inter])
+
+    return response
+
+
+def ExportarExtensao(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="pesquisas.csv"'
+
+    writer = unicodecsv.writer(response, encoding='utf-8')
+    writer.writerow(['Centro', 'Nome', 'Docente', 'Semestre', 'Área',
+        'Financiador', 'Carga horária', 'Estudantes de Graduação',
+        'Estudantes de Pós', 'Bolsistas PIBEX', 'Bolsistas PPQ',
+        'Voluntários', 'Parceria Institucional', 'Parceria Interinstitucional'])
+
+    for projeto in Extensao.objects.all():
+        writer.writerow([projeto.docente.centro, projeto.nome, projeto.docente,
+             projeto.semestre, projeto.area, projeto.financiador,
+             projeto.cargahoraria, projeto.estudantes_graduacao,
+             projeto.estudantes_pos, projeto.bolsistas_pibex,
+             projeto.bolsistas_ppq, projeto.voluntarios, projeto.parceria,
+             projeto.parceria_inter])
+
+    return response
+
+
+def ExportarAdministrativo(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="pesquisas.csv"'
+
+    writer = unicodecsv.writer(response, encoding='utf-8')
+    writer.writerow(['Centro', 'Nome', 'Docente', 'Semestre', 'Afastamento',
+        'Cargo', 'Comissões'])
+
+    for atividade in Administrativo.objects.all():
+        writer.writerow([atividade.docente.centro, atividade.docente,
+            atividade.semestre, atividade.afastamento, atividade.cargo,
+            atividade.comissoes])
 
     return response
