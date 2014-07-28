@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, TemplateView
 
 from django.contrib import admin
 admin.autodiscover()
@@ -15,11 +15,12 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', RedirectView.as_view(url='admin/')),
+    url(r'^relatorios/', TemplateView.as_view(template_name="relatorios.html")),
     url(r'^relatorio-ensino/', RelatorioEnsino),
     url(r'^relatorio-docente/', RelatorioDocente),
     url(r'^relatorio-projetos/', RelatorioProjetos),
-    url(r'^exportar-disciplina/', ExportarDisciplina),
-    url(r'^exportar-pesquisa/', ExportarPesquisa),
-    url(r'^exportar-extensao/', ExportarExtensao),
-    url(r'^exportar-administrativo/', ExportarAdministrativo),
+    url(r'^exportar-disciplina/', ExportarDisciplina, name="exportar-disciplina"),
+    url(r'^exportar-pesquisa/', ExportarPesquisa, name="exportar-pesquisa"),
+    url(r'^exportar-extensao/', ExportarExtensao, name="exportar-extensao"),
+    url(r'^exportar-administrativo/', ExportarAdministrativo, name="exportar-admin"),
 )
