@@ -189,6 +189,29 @@ def RelatorioDocente(request):
         })
 
 
+def filtro_por_centro(data):
+    result = [
+        ['CAHL', data.filter(docente__centro='cahl').count()],
+        ['CCAAB', data.filter(docente__centro='ccaab').count()],
+        ['CCS', data.filter(docente__centro='ccs').count()],
+        ['CETEC', data.filter(docente__centro='cetec').count()],
+        ['CFP', data.filter(docente__centro='cfp').count()],
+        ]
+    return result
+
+
+def RelatorioProjetos(request):
+
+    return render(request, 'relatorio_projetos.html', {
+        'pesquisa': filtro_por_centro(Pesquisa.objects.all()),
+        'extensao': filtro_por_centro(Extensao.objects.all()),
+        'pesquisa_20131': filtro_por_centro(Pesquisa.sem_20131.all()),
+        'pesquisa_20132': filtro_por_centro(Pesquisa.sem_20132.all()),
+        'extensao_20131': filtro_por_centro(Extensao.sem_20131.all()),
+        'extensao_20132': filtro_por_centro(Extensao.sem_20132.all()),
+        })
+
+
 def ExportarDisciplina(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')

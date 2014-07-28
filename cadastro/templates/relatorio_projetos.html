@@ -1,0 +1,47 @@
+{% extends "admin/base_site.html" %}
+{% load chartkick %}
+{% load static %}
+
+{% block object-tools %}
+  <p class="navbar-brand">Relatório de Projetos por Centro</p>
+{% endblock %}
+
+{% block content %}
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="{% static "chartkick.js" %}"></script>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Projetos de Pesquisa</h4>
+      {% pie_chart pesquisa_20131 with id='chart-1' height='300px' %}
+    </div>
+    <div class="col-md-6">
+      <h4>Projetos de Extensão</h4>
+      {% pie_chart pesquisa_20132 with id='chart-2' height='300px' %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Projetos de Pesquisa em 2013.1</h4>
+      {% pie_chart pesquisa_20131 with id='chart-3' height='300px' %}
+    </div>
+    <div class="col-md-6">
+      <h4>Projetos de Extensão em 2013.1</h4>
+      {% pie_chart extensao_20131 with id='chart-4' height='300px' %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Projetos de Pesquisa em 2013.2</h4>
+      {% pie_chart pesquisa_20132 with id='chart-5' height='300px' %}
+    </div>
+    <div class="col-md-6">
+      <h4>Projetos de Extensão em 2013.2</h4>
+      {% pie_chart extensao_20132 with id='chart-6' height='300px' %}
+    </div>
+  </div>
+
+{% endblock %}
+
