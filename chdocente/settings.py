@@ -40,6 +40,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'cadastro'
+    'chartkick'
+)
+
+import chartkick
+STATICFILES_DIRS = (
+    chartkick.js(),
 )
 
 MIDDLEWARE_CLASSES = (
@@ -86,7 +92,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Bahia'
 
 USE_I18N = True
 
