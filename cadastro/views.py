@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import csv
+import unicodecsv
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -194,7 +194,7 @@ def ExportarDisciplinas(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="disciplinas.csv"'
 
-    writer = csv.writer(response)
+    writer = unicodecsv.writer(response, encoding='utf-8')
     writer.writerow(['Centro', 'Código', 'Nome', 'Docente', 'Semestre', 'Tipo',
         'Nível', 'Multicampia', 'Carga horária', 'Estudantes'])
 
@@ -212,7 +212,7 @@ def ExportarPesquisas(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="pesquisas.csv"'
 
-    writer = csv.writer(response)
+    writer = unicodecsv.writer(response, encoding='utf-8')
     writer.writerow(['Centro', 'Nome', 'Docente', 'Semestre', 'Área',
         'Financiador', 'Carga horária', 'Estudantes de Graduação',
         'Estudantes de Pós', 'Bolsistas PIBIC/PIBITI', 'Bolsistas PPQ',
