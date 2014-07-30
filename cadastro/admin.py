@@ -59,7 +59,8 @@ class ExtensaoAdmin(admin.ModelAdmin):
 class AdministrativoAdmin(admin.ModelAdmin):
 
     list_filter = ('semestre', 'docente__centro', 'cargo', 'comissoes')
-    list_display = ('docente', 'semestre', 'cargo', 'comissoes')
+    list_editable = ('comissoes', 'afastamento')
+    list_display = ('docente', 'semestre', 'cargo', 'comissoes', 'afastamento')
     ordering = ['docente__nome']
 
     def get_queryset(self, request):
