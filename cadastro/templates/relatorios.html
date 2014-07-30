@@ -7,40 +7,6 @@
 {% block content %}
 
 <div class="col-md-12">
-  <form class="form-horizontal" action="/relatorio-ensino" method="get">
-  <fieldset>
-  <legend>Relatório de Ensino</legend>
-
-  <div class="dropdown col-md-4">
-    <select id="semestre" name="semestre" class="form-control">
-      <option value="">Todos os Semestres</option>
-      <option value="20131">2013.1</option>
-      <option value="20132">2013.2</option>
-    </select>
-  </div>
-
-  <div class="dropdown col-md-4">
-    <select id="centro" name="centro" class="form-control">
-      <option value="">Todos os Centros</option>
-      <option value="cahl">CAHL</option>
-      <option value="ccaab">CCAAB</option>
-      <option value="ccs">CCS</option>
-      <option value="cetec">CETEC</option>
-      <option value="cfp">CFP</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <div class="col-md-4">
-      <button class="btn btn-primary">Ver Relatório</button>
-    </div>
-  </div>
-
-  </fieldset>
-  </form>
-</div>
-
-<div class="col-md-12">
   <form class="form-horizontal" action="/relatorio-ch" method="get">
   <fieldset>
 
@@ -67,6 +33,44 @@
   </fieldset>
   </form>
 </div>
+
+
+<div class="col-md-12">
+  <form class="form-horizontal" action="/relatorio-geral" method="get">
+  <fieldset>
+
+  <legend>Relatório de Carga Horária Geral</legend>
+
+  <div class="dropdown col-md-4">
+    <select id="semestre" name="semestre" class="form-control">
+      <option value="20131">2013.1</option>
+      <option value="20132">2013.2</option>
+    </select>
+  </div>
+
+
+  <div class="dropdown col-md-4">
+    <select id="centro" name="centro" class="form-control">
+      <option value="">Todos os Centros</option>
+      <option value="cahl">CAHL</option>
+      <option value="ccaab">CCAAB</option>
+      <option value="ccs">CCS</option>
+      <option value="cetec">CETEC</option>
+      <option value="cfp">CFP</option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-md-4">
+      <button class="btn btn-primary">Ver Relatório</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+</div>
+
 
 <div class="col-md-12">
   <form class="form-horizontal" action="/relatorio-docente" method="get">
@@ -104,6 +108,42 @@
   </fieldset>
   </form>
 </div>
+
+
+<div class="col-md-12">
+  <form class="form-horizontal" action="/relatorio-ensino" method="get">
+  <fieldset>
+  <legend>Relatório de Ensino</legend>
+
+  <div class="dropdown col-md-4">
+    <select id="semestre" name="semestre" class="form-control">
+      <option value="">Todos os Semestres</option>
+      <option value="20131">2013.1</option>
+      <option value="20132">2013.2</option>
+    </select>
+  </div>
+
+  <div class="dropdown col-md-4">
+    <select id="centro" name="centro" class="form-control">
+      <option value="">Todos os Centros</option>
+      <option value="cahl">CAHL</option>
+      <option value="ccaab">CCAAB</option>
+      <option value="ccs">CCS</option>
+      <option value="cetec">CETEC</option>
+      <option value="cfp">CFP</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-4">
+      <button class="btn btn-primary">Ver Relatório</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+</div>
+
 
 <div class="col-md-12">
   <form class="form-horizontal" action="/relatorio-projetos" method="get">

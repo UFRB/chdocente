@@ -7,7 +7,7 @@ admin.autodiscover()
 from cadastro.views import RelatorioEnsino, RelatorioDocente, RelatorioProjetos
 from cadastro.views import ExportarDisciplina, ExportarPesquisa
 from cadastro.views import ExportarExtensao, ExportarAdministrativo
-from cadastro.views import RelatorioCargaHoraria
+from cadastro.views import RelatorioCargaHoraria, RelatorioGeral
 
 urlpatterns = patterns('',
     # Examples:
@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^relatorio-docente/', RelatorioDocente),
     url(r'^relatorio-projetos/', RelatorioProjetos),
     url(r'^relatorio-ch/', RelatorioCargaHoraria),
+    url(r'^relatorio-geral/', RelatorioGeral),
     url(r'^exportar-disciplina/', ExportarDisciplina, name="exportar-disciplina"),
     url(r'^exportar-pesquisa/', ExportarPesquisa, name="exportar-pesquisa"),
     url(r'^exportar-extensao/', ExportarExtensao, name="exportar-extensao"),

@@ -1,0 +1,31 @@
+{% extends "admin/base_site.html" %}
+{% load cadastrotags %}
+
+{% block object-tools %}
+  <p class="navbar-brand">Relatório de Carga Horária Geral
+    {% if centro %} - {{ centro|upper }}{% endif %}
+    {% if semestre %} - {{ semestre }}{% endif %}
+  </p>
+{% endblock %}
+
+{% block content %}
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <th>Docente</th>
+        <th>Ensino</th>
+        <th>Pesquisa</th>
+        <th>Extensão</th>
+        <th>Cargo</th>
+        <th>Afastamento</th>
+        <th>CH Total</th>
+      </thead>
+      <tbody>
+        {% for docente in docentes %}
+          {% carga_horaria docente.nome semestre %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

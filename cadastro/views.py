@@ -248,6 +248,27 @@ def RelatorioCargaHoraria(request):
         })
 
 
+def RelatorioGeral(request):
+
+    if 'centro' in request.GET and request.GET['centro']:
+        centro = request.GET['centro']
+        docentes = Docente.objects.filter(centro=centro)
+    else:
+        centro = ''
+        docentes = Docente.objects.all()
+
+    if 'semestre' in request.GET and request.GET['semestre']:
+        semestre = request.GET['semestre']
+    else:
+        semestre = '20131'
+
+    return render(request, 'relatorio_geral.html',{
+        'docentes': docentes,
+        'centro': centro,
+        'semestre': semestre
+        })
+
+
 def ExportarDisciplina(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
