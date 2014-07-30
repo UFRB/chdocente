@@ -1,0 +1,21 @@
+{% extends "admin/base_site.html" %}
+{% load chartkick %}
+{% load static %}
+
+{% block object-tools %}
+  <p class="navbar-brand">Relatório Carga Horária de Ensino
+    {% if centro %} - {{ centro|upper }}{% endif %}
+  </p>
+{% endblock %}
+
+{% block content %}
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="{% static "chartkick.js" %}"></script>
+
+  <h3>Docentes por Carga Horária de Ensino Semanal - 2013.1</h3>
+  {% column_chart ensino_20131 with id='chart-1' height='300px' %}
+
+  <h3>Docentes por Carga Horária de Ensino Semanal - 2013.2</h3>
+  {% column_chart ensino_20132 with id='chart-2' height='300px' %}
+
+{% endblock %}

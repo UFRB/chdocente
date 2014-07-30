@@ -31,6 +31,15 @@ class Docente(models.Model):
     nome = models.CharField(max_length=100, unique=True)
     centro = models.CharField(choices=CENTROS, max_length=11)
 
+    def ch_ensino(self, semestre):
+        return sum([item.cargahoraria for item in self.disciplina_set.filter(semestre=semestre)])
+
+    def ch_pesquisa(self, semestre):
+        return sum([item.cargahoraria for item in self.pesquisa_set.filter(semestre=semestre)])
+
+    def ch_extensao(self, semestre):
+        return sum([item.cargahoraria for item in self.extensao_set.filter(semestre=semestre)])
+
     def __str__(self):
         return '%s - %s' % (self.matricula, self.nome)
 

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import unicodecsv
+from collections import Counter
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -209,6 +210,41 @@ def RelatorioProjetos(request):
         'pesquisa_20132': filtro_por_centro(Pesquisa.sem_20132.all()),
         'extensao_20131': filtro_por_centro(Extensao.sem_20131.all()),
         'extensao_20132': filtro_por_centro(Extensao.sem_20132.all()),
+        })
+
+
+def valores_ch(data):
+    result = [
+        ['Menos que 10', sum([item[1] for item in data.items() if item[0]<60])],
+        ['10h', sum([item[1] for item in data.items() if item[0]>=60 and item[0]<66])],
+        ['11h', sum([item[1] for item in data.items() if item[0]>=66 and item[0]<72])],
+        ['12h', sum([item[1] for item in data.items() if item[0]>=72 and item[0]<78])],
+        ['13h', sum([item[1] for item in data.items() if item[0]>=78 and item[0]<84])],
+        ['14h', sum([item[1] for item in data.items() if item[0]>=84 and item[0]<90])],
+        ['15h', sum([item[1] for item in data.items() if item[0]>=90 and item[0]<96])],
+        ['16h', sum([item[1] for item in data.items() if item[0]>=96 and item[0]<102])],
+        ['Mais que 16h', sum([item[1] for item in data.items() if item[0]>102])],
+        ]
+
+    return result
+
+
+def RelatorioCargaHoraria(request):
+
+    if 'centro' in request.GET and request.GET['centro']:
+        centro = request.GET['centro']
+        docentes = Docente.objects.filter(centro=centro)
+    else:
+        centro = ''
+        docentes = Docente.objects.all()
+
+    ensino_20131 = valores_ch(Counter([i.ch_ensino('20131') for i in docentes]))
+    ensino_20132 = valores_ch(Counter([i.ch_ensino('20132') for i in docentes]))
+
+    return render(request, 'relatorio_ch.html', {
+        'centro': centro,
+        'ensino_20131': ensino_20131,
+        'ensino_20132': ensino_20132,
         })
 
 
