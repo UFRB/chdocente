@@ -1,9 +1,14 @@
 <tr>
-  <td>{{ docente }}</td>
+  <td>{{ docente.nome }}</td>
   <td>{{ ch_ensino }}</td>
   <td>{{ ch_pesquisa }}</td>
   <td>{{ ch_extensao }}</td>
   <td>{{ cargo }}</td>
-  <td>{{ afastamento }}</td>
+  <td>{% if afastamento == True %}
+        <img alt="True" src="/static/admin/img/icon-yes.gif">
+      {% else %}
+        <img alt="False" src="/static/admin/img/icon-no.gif">
+      {% endif %}
+  </td>
   <td>{{ ch_total }}</td>
 </tr>
