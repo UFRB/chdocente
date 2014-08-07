@@ -215,15 +215,15 @@ def RelatorioProjetos(request):
 
 def valores_ch(data):
     result = [
-        ['Menos que 10', sum([item[1] for item in data.items() if item[0]<60])],
-        ['10h', sum([item[1] for item in data.items() if item[0]>=60 and item[0]<66])],
-        ['11h', sum([item[1] for item in data.items() if item[0]>=66 and item[0]<72])],
-        ['12h', sum([item[1] for item in data.items() if item[0]>=72 and item[0]<78])],
-        ['13h', sum([item[1] for item in data.items() if item[0]>=78 and item[0]<84])],
-        ['14h', sum([item[1] for item in data.items() if item[0]>=84 and item[0]<90])],
-        ['15h', sum([item[1] for item in data.items() if item[0]>=90 and item[0]<96])],
-        ['16h', sum([item[1] for item in data.items() if item[0]>=96 and item[0]<102])],
-        ['Mais que 16h', sum([item[1] for item in data.items() if item[0]>102])],
+        ['Menos que 10', sum([item[1] for item in data.items() if item[0]<170])],
+        ['10h', sum([item[1] for item in data.items() if item[0]>=170 and item[0]<187])],
+        ['11h', sum([item[1] for item in data.items() if item[0]>=187 and item[0]<204])],
+        ['12h', sum([item[1] for item in data.items() if item[0]>=204 and item[0]<221])],
+        ['13h', sum([item[1] for item in data.items() if item[0]>=221 and item[0]<238])],
+        ['14h', sum([item[1] for item in data.items() if item[0]>=238 and item[0]<255])],
+        ['15h', sum([item[1] for item in data.items() if item[0]>=255 and item[0]<272])],
+        ['16h', sum([item[1] for item in data.items() if item[0]>=272 and item[0]<289])],
+        ['Mais que 16h', sum([item[1] for item in data.items() if item[0]>289])],
         ]
 
     return result

@@ -9,7 +9,7 @@ register = template.Library()
 def carga_horaria(docente, semestre):
     docente = Docente.objects.get(nome=docente)
 
-    ch_ensino = docente.ch_ensino(semestre) / 6
+    ch_ensino = docente.ch_ensino(semestre) / 17
     ch_pesquisa = docente.ch_pesquisa(semestre)
     ch_extensao = docente.ch_extensao(semestre)
     ch_total = ch_ensino + ch_pesquisa + ch_extensao
