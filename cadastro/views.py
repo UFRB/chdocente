@@ -215,7 +215,9 @@ def RelatorioProjetos(request):
 
 def valores_ch(data):
     result = [
-        ['Menos que 10', sum([item[1] for item in data.items() if item[0]<170])],
+        ['Menos que 8', sum([item[1] for item in data.items() if item[0]<136])],
+        ['8h', sum([item[1] for item in data.items() if item[0]>=136 and item[0]<153])],
+        ['9h', sum([item[1] for item in data.items() if item[0]>=153 and item[0]<170])],
         ['10h', sum([item[1] for item in data.items() if item[0]>=170 and item[0]<187])],
         ['11h', sum([item[1] for item in data.items() if item[0]>=187 and item[0]<204])],
         ['12h', sum([item[1] for item in data.items() if item[0]>=204 and item[0]<221])],
